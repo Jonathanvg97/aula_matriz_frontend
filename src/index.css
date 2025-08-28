@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+@import "tailwindcss";
+
+/* Definición de temas */
+@theme {
+  --color-primary: #001f3d;
+  --color-secondary: #fff;
+  --color-destructive: #b91c1c;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background: var(--color-primary);
+}
+
+/* Aplica overflow: hidden solo en pantallas grandes (PC) */
+@media (min-width: 1023px) {
+  body {
+    overflow: hidden;
+  }
+}
+
+/* Variables de colores */
+:root {
+  --destructive: 0 84.2% 60.2%; /* Rojo brillante */
+  --destructive-foreground: 0 0% 98%; /* Blanco casi puro */
+}
+
+.dark {
+  --destructive: 0 62.8% 30.6%; /* Rojo más oscuro */
+}
+
+/* Estilos generales */
+.bg-primary-dark {
+  @apply dark:bg-gray-900 transition-colors duration-300;
+}
+
+.text-muted-foreground {
+  @apply text-gray-600 dark:text-gray-300;
+}
+
+.text-primary,
+.hover\:text-primary:hover {
+  @apply text-blue-600 dark:text-blue-400;
+}
+
+.hover\:text-primary:hover {
+  @apply text-blue-500 dark:text-blue-300;
+}
+
+.text-tertiary {
+  @apply text-blue-800 dark:text-blue-950;
+}
