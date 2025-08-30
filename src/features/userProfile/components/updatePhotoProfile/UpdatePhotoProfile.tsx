@@ -34,7 +34,7 @@ export const UpdatePhotoProfile = ({
       if (res) onOpenChange(false);
     }
   };
-  
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent

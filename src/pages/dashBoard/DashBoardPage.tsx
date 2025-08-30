@@ -18,7 +18,7 @@ import { DashBoardPageSkeleton } from "@/components/skeletons/DashBoardPageSkele
 import { useUserStore } from "@/store/user.store";
 import { useUserProfile } from "@/features/userProfile/hooks/useUserProfile";
 import { useEffect, useState } from "react";
-import { UpdatePhotoProfile } from "@/features/userProfile/components/updatePhotoProfile/updatePhotoProfile";
+import { UpdatePhotoProfile } from "../../features/userProfile/components/updatePhotoProfile/UpdatePhotoProfile";
 
 export const DashBoardPage = () => {
   //
