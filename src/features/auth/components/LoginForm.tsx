@@ -34,12 +34,13 @@ export function LoginForm({
   });
 
   //Handlers
+
   const onSubmit = async (data: LoginFormValues) => {
     const response = await login(data);
 
-    if (response?.success) {
-      toast("Inicio de sesión", {
-        description: `Sesión iniciada correctamente ${response.message.user.userName}`,
+    if (response?.status === "success") {
+      toast.success("Inicio de sesión", {
+        description: response.message,
       });
     }
   };

@@ -10,7 +10,6 @@
 
 body {
   font-family: "Nunito", sans-serif;
-  background: var(--color-primary);
 }
 
 /* Aplica overflow: hidden solo en pantallas grandes (PC) */

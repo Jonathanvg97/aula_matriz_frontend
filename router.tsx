@@ -1,6 +1,7 @@
 import { DashBoardPage } from "@/pages/dashBoard/DashBoardPage";
 import { RouteConfigInterface } from "./src/features/auth/types/routeConfig.interface";
 import LoginPage from "./src/pages/LoginPage/LoginPage";
+import { UserProfilePage } from "@/pages/UserProfilePage/UserProfilePage";
 
 export const routesPublicConfig: RouteConfigInterface[] = [
   {
@@ -17,6 +18,13 @@ export const routesPrivateConfig: RouteConfigInterface[] = [
     id: "2",
     path: "/dashboard",
     component: DashBoardPage,
+    exact: true,
+    private: true,
+  },
+  {
+    id: "2",
+    path: "/userProfile",
+    component: UserProfilePage,
     exact: true,
     private: true,
   },

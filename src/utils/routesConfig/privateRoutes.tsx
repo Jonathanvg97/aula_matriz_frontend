@@ -1,20 +1,20 @@
 import { MainLayout } from "@/components/ui/layouts/mainLayout/MainLayout";
-import { useAuth } from "@/hooks/useAuth";
+import { useAuthActions } from "@/features/auth/hooks/useAuthActions";
 import { Navigate, Outlet } from "react-router-dom";
 
 export const PrivateRoutes = () => {
   //Hook
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated } = useAuthActions();
 
   // validation
   if (!isAuthenticated) {
     return <Navigate to={"/"} />;
   }
 
-  // const token = sessionStorage.getItem("token");
-  // if (!token) {
-  //   return <Navigate to="/" replace />;
-  // }
+  const token = sessionStorage.getItem("token");
+  if (!token) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <MainLayout>

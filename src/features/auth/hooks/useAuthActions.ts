@@ -1,51 +1,49 @@
+// src/features/auth/hooks/useAuthActions.ts
 import { useNavigate } from "react-router-dom";
-import { singIn } from "../services/auth.service";
 import { AuthBodyInterface, AuthResponse } from "../types";
 import { toast } from "sonner";
+import { signIn } from "../services/auth.service";
 
 export const useAuthActions = () => {
-  //Hooks
   const navigate = useNavigate();
 
-  //Function login
+  // 🔑 LOGIN
   const login = async (
     data: AuthBodyInterface
   ): Promise<AuthResponse | null> => {
     try {
-      const response = await singIn(data);
+      const response = await signIn(data);
 
-      if (response?.success) {
-        sessionStorage.setItem("token", response.message.token);
-        sessionStorage.setItem("refreshToken", response.message.refreshToken);
+      if (response?.status === "success") {
+        sessionStorage.setItem("token", response.data.access);
+        sessionStorage.setItem("refreshToken", response.data.refresh);
 
         navigate("/dashboard");
         return response;
       }
 
       return null;
-    } catch (error) {
-      if (
-        error instanceof Error &&
-        error.message === "Invalid email or password"
-      ) {
-        toast.error("Credenciales incorrectas");
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast.error(error.message); 
       } else {
-        toast.error("Error al iniciar sesión, intente nuevamente.");
-        console.error("Error login:", error);
+        toast.error("Ocurrió un error inesperado");
       }
-
       return null;
     }
   };
 
-  //Function logout
+  // 🔑 LOGOUT
   const logout = async () => {
     sessionStorage.clear();
     navigate("/");
   };
 
+  const isAuthenticated = !!sessionStorage.getItem("token");
+
   return {
     login,
     logout,
+    isAuthenticated,
   };
 };

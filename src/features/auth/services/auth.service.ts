@@ -1,28 +1,26 @@
-import { postData } from "@/helpers/fecthMethods";
+import axios from "axios";
 import { LOGIN_ENDPOINT } from "@/utils/paths";
 import { AuthBodyInterface, AuthResponse } from "../types";
 
-export const singIn = async (
+export const signIn = async (
   body: AuthBodyInterface
 ): Promise<AuthResponse | null> => {
   try {
-    const response = (await postData<AuthBodyInterface, AuthResponse>({
-      url: LOGIN_ENDPOINT,
-      data: body,
-      statusArray: [200],
-      returnPromise: true,
-      isPrivate: false,
-    })) as AuthResponse | null;
+    const { data } = await axios.post<AuthResponse>(LOGIN_ENDPOINT, body);
 
-    // Verifica que `response` no sea `false` antes de acceder a `data`
-    if (response && typeof response === "object" && "data" in response) {
-      return response.data as AuthResponse;
+    if (data.status === "success") {
+      localStorage.setItem("access_token", data.data.access);
+      localStorage.setItem("refresh_token", data.data.refresh);
+      return data;
     }
 
     return null;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw error;
+  } catch (error: unknown) {
+    if (axios.isAxiosError(error)) {
+      if (error.response?.status === 401) {
+        throw new Error("Credenciales incorrectas");
+      }
+      throw new Error("Error en el servidor de autenticación");
     }
     throw error;
   }

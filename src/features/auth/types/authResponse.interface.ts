@@ -1,23 +1,11 @@
 export interface AuthResponse {
-  message: {
-    token: string;
-    refreshToken: string;
-    user: {
-      id: string;
-      userName: string;
-      email: string;
-      role: string;
-    };
+  data: {
+    access: string;
+    refresh: string;
+    requires_2fa: boolean;
+    user_id: number;
+    rol: string;
   };
-  success: boolean;
-  status: number;
-}
-
-export interface RefreshResponse {
-  message: {
-    token: string;
-    refreshToken: string;
-  };
-  success: boolean;
-  status: number;
+  message: string;
+  status: string;
 }
