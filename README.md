@@ -196,7 +196,7 @@ Crea un archivo .env.local en la raíz del proyecto y agrega la variable:
 
 # Despliegue
 
-**https://**
+**https://aula-matriz-frontend.vercel.app/**
 
 ## Licencia
 
